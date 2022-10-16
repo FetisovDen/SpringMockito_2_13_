@@ -14,15 +14,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-
 @ExtendWith(MockitoExtension.class)
 class DepartmentsServiceTest {
-
-
     @Mock
     private EmployeeService employeeService;
-
-
     @InjectMocks
     private DepartmentsService departmentsService;
 
@@ -35,34 +30,38 @@ class DepartmentsServiceTest {
                 )
         );
     }
+
     @Test
     void testWorkMethodMaxSalaryByDepartment() {
         assertThat(departmentsService.maxSalaryByDepartment(5))
                 .isEqualTo(new Employee("Wer_D", 500, 5));
-        assertThatExceptionOfType(EmployeeNotFoundException.class).isThrownBy(()->departmentsService.maxSalaryByDepartment(3));
+        assertThatExceptionOfType(EmployeeNotFoundException.class).isThrownBy(() -> departmentsService.maxSalaryByDepartment(3));
     }
+
     @Test
     void testWorkMethodMinSalaryByDepartment() {
         assertThat(departmentsService.minSalaryByDepartment(5))
                 .isEqualTo(new Employee("Aer_E", 200, 5));
-        assertThatExceptionOfType(EmployeeNotFoundException.class).isThrownBy(()->departmentsService.minSalaryByDepartment(3));
+        assertThatExceptionOfType(EmployeeNotFoundException.class).isThrownBy(() -> departmentsService.minSalaryByDepartment(3));
     }
+
     @Test
     void testWorkMethodAllOfDepartment() {
-        assertThat(departmentsService.allOfDepartment(3))
+        assertThat(departmentsService.allOfDepartment(5))
                 .containsExactlyInAnyOrderElementsOf(List.of(
                                 new Employee("Aer_E", 200, 5),
                                 new Employee("Wer_D", 500, 5)
                         )
                 );
     }
+
     @Test
     void testWorkMethodSortedByDepartment() {
         assertThat(departmentsService.sortedByDepartment())
                 .isEqualTo(List.of(
-                        new Employee("Key_R", 300, 1),
-                        new Employee("Wer_D", 500, 5),
-                        new Employee("Aer_E", 200, 5)
+                                new Employee("Key_R", 300, 1),
+                                new Employee("Wer_D", 500, 5),
+                                new Employee("Aer_E", 200, 5)
                         )
                 );
     }

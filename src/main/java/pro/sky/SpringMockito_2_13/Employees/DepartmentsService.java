@@ -7,17 +7,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-
 @Service
 public class DepartmentsService {
-    private  EmployeeService employeeService;
+    private EmployeeService employeeService;
 
     public DepartmentsService(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-
-
 
     public Employee maxSalaryByDepartment(Integer department) {
         return employeeService.findAll().stream()
@@ -37,7 +33,7 @@ public class DepartmentsService {
         return employeeService.findAll().stream()
                 .filter(employee -> employee.getDepartment() == department)
                 .collect(Collectors.toList());
-}
+    }
 
     public List<Employee> sortedByDepartment() {
         return employeeService.findAll().stream()
@@ -46,13 +42,3 @@ public class DepartmentsService {
 
     }
 }
-
-
-
-
-
-
-
-
-
-

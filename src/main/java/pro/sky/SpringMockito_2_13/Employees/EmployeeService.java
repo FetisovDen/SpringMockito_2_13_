@@ -14,15 +14,15 @@ import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
-    public Map<String , Employee> employeesBook = new HashMap<>();
+    public Map<String, Employee> employeesBook = new HashMap<>();
 
-    private  String key(String fullname) {
+    private String key(String fullname) {
         return fullname;
     }
 
     public Map<String, Employee> addEmployee(String fullName, double salary, int department) {
-        Employee employee = new Employee(checkFullName(fullName),salary,department);
-        String id = key(checkFullName(fullName));
+        Employee employee = new Employee(checkAndEditingFullName(fullName), salary, department);
+        String id = key(checkAndEditingFullName(fullName));
         if (!employeesBook.containsKey(id)) {
             employeesBook.put(id, employee);
             return employeesBook;
@@ -31,33 +31,34 @@ public class EmployeeService {
         }
     }
 
-    public  String removeEmployee(String fullName) {
+    public Map<String, Employee> removeEmployee(String fullName) {
         String id = key(fullName);
         if (employeesBook.containsKey(id)) {
             employeesBook.remove(id);
-            return employeesBook.toString();
+            return employeesBook;
         } else {
             throw new EmployeeNotFoundException();
         }
     }
 
-    public  String containsEmployee(String fullName) {
+    public Boolean containsEmployee(String fullName) {
         String id = key(fullName);
         if (employeesBook.containsKey(id)) {
-            return String.valueOf(employeesBook.get(id));
+            return true;
         } else {
             throw new EmployeeNotFoundException();
         }
     }
 
-    public  List<Employee> findAll() {
-
+    public List<Employee> findAll() {
         return new ArrayList<>(employeesBook.values());
     }
 
-    public String checkFullName(String fullName) {
-        List<String> fAndI = List.of(StringUtils.splitPreserveAllTokens(fullName,"_"));
-        if (!(fAndI.size() == 2)) {throw new BadRequestException();}
+    public String checkAndEditingFullName(String fullName) {
+        List<String> fAndI = List.of(StringUtils.splitPreserveAllTokens(fullName, "_"));
+        if (!(fAndI.size() == 2)) {
+            throw new BadRequestException();
+        }
         if (StringUtils.isEmpty(String.join("", fAndI))) {
             throw new BadRequestException();
         } else if (!StringUtils.isAlpha((String.join("", fAndI)))) {
@@ -69,8 +70,6 @@ public class EmployeeService {
                 .map(Object::toString)
                 .collect(Collectors.joining("_"));
     }
-
-
 }
 
 

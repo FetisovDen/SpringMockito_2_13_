@@ -12,11 +12,9 @@ import java.util.Map;
 @RequestMapping("/employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
-
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-
 
     @GetMapping("/add")
     public Map<String, Employee> add(@RequestParam("fullName") String fullName,
@@ -26,12 +24,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/remove")
-    public String remove(@RequestParam("fullname") String fullname) {
+    public Map<String, Employee> remove(@RequestParam("fullname") String fullname) {
         return employeeService.removeEmployee(fullname);
     }
 
     @GetMapping("/find")
-    public String find(@RequestParam("fullname") String fullname) {
+    public Boolean find(@RequestParam("fullname") String fullname) {
         return employeeService.containsEmployee(fullname);
     }
 

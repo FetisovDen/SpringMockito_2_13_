@@ -1,6 +1,5 @@
 package pro.sky.SpringMockito_2_13.Employees;
 
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +13,6 @@ public class DepartmentsController {
     public DepartmentsController(DepartmentsService departmentsService) {
         this.departmentsService = departmentsService;
     }
-
 
     @GetMapping("/max-salary")
     public String max_salary(@RequestParam("departmentId") int department) {
@@ -35,6 +33,4 @@ public class DepartmentsController {
     public String allSortedByDepartment() {
         return String.valueOf(departmentsService.sortedByDepartment());
     }
-
-
 }

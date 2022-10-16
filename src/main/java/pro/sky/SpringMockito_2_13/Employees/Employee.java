@@ -2,11 +2,10 @@ package pro.sky.SpringMockito_2_13.Employees;
 
 import java.util.Objects;
 
-
 public class Employee {
     private String fullName;
-    private  double salary;
-    private  int department;
+    private double salary;
+    private int department;
 
     public Employee(String fullName, double salary, int department) {
         this.fullName = fullName;
@@ -14,26 +13,17 @@ public class Employee {
         this.department = department;
     }
 
-    public  void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public  String getFullName() {
+    public String getFullName() {
         return fullName;
     }
 
-
-    public  double getSalary() {
-
+    public double getSalary() {
         return salary;
     }
 
-    public  int getDepartment() {
-
+    public int getDepartment() {
         return department;
     }
-
-
 
     @Override
     public boolean equals(Object o) {

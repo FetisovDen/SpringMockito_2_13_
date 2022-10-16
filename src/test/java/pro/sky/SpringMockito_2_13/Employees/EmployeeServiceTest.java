@@ -15,7 +15,6 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
 @ExtendWith(MockitoExtension.class)
 class EmployeeServiceTest {
     @InjectMocks
@@ -60,7 +59,6 @@ class EmployeeServiceTest {
         assertEquals(employeesBook, Map.of("Dasha_Ponchikova", new Employee("Dasha_Ponchikova", 200, 3)));
     }
 
-
     @ParameterizedTest
     @CsvSource({"Dasha_M,200,3", "Kira_Z,100,5", "Portman_M,11,5"})
     void testRemoveEmployee(String fullname, double salary, int department) {
@@ -82,12 +80,11 @@ class EmployeeServiceTest {
     void testFindEmployeeInBook(String fullname, double salary, int department) {
         employeeService.addEmployee(fullname, salary, department);
         employeeService.addEmployee("Serg_D", 500, 1);
-        assertEquals(employeeService.containsEmployee(fullname), employeeService.employeesBook.get(fullname).toString());
+        assertEquals(employeeService.containsEmployee(fullname), true);
         assertThrows(EmployeeNotFoundException.class, () -> {
             employeeService.containsEmployee("Serg_Dod");
         });
     }
-
 
     @ParameterizedTest
     @CsvSource({"Dasha_M,200,3", "Kira_Z,100,5", "Portman_M,11,5"})
@@ -96,6 +93,5 @@ class EmployeeServiceTest {
         employeeService.addEmployee("Serg_D", 500, 1);
         assertEquals(employeeService.findAll(),
                 Map.of(fullname, new Employee(fullname, salary, department), "Serg_D", new Employee("Serg_D", 500, 1)));
-
     }
 }
